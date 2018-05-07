@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="6g3-M9-WkD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="6g3-M9-WkD">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -147,6 +147,40 @@
             </objects>
             <point key="canvasLocation" x="1690.3999999999999" y="320.92000000000002"/>
         </scene>
+        <!--Sam Example View Controller-->
+        <scene sceneID="E8y-No-QBa">
+            <objects>
+                <viewController id="Bli-h7-rS3" customClass="SamExampleViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="L5G-VC-ltk"/>
+                        <viewControllerLayoutGuide type="bottom" id="V71-nS-p3F"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fcS-VW-GVP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FP5-jn-7Ax">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="FP5-jn-7Ax" firstAttribute="top" secondItem="fcS-VW-GVP" secondAttribute="top" id="1wu-ug-WdW"/>
+                            <constraint firstItem="V71-nS-p3F" firstAttribute="top" secondItem="FP5-jn-7Ax" secondAttribute="bottom" id="QAQ-iK-vfc"/>
+                            <constraint firstAttribute="trailing" secondItem="FP5-jn-7Ax" secondAttribute="trailing" id="e7m-Po-7GZ"/>
+                            <constraint firstItem="FP5-jn-7Ax" firstAttribute="leading" secondItem="fcS-VW-GVP" secondAttribute="leading" id="pMU-Ck-hWL"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ncO-dw-mUI"/>
+                    <connections>
+                        <outlet property="tableView" destination="FP5-jn-7Ax" id="GkY-Nk-Anb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="swS-NA-fWH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2317.5" y="-144.5"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="nLS-mE-meo">
             <objects>
@@ -208,6 +242,7 @@
                         <segue destination="qIY-1j-dNf" kind="push" identifier="MultivaluedSectionsControllerSegue" id="HjC-JK-Qvc"/>
                         <segue destination="u8Y-1k-1VR" kind="push" identifier="PlainTableViewStyleViewControllerSegue" id="kqc-ak-a1R"/>
                         <segue destination="fc5-sQ-cEm" kind="push" identifier="SwipeActionsControllerSegue" id="AxK-me-pi6"/>
+                        <segue destination="Bli-h7-rS3" kind="push" identifier="SamExampleViewControllerSegue" id="dQU-qy-Vjo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eoz-Jq-Zy9" userLabel="First Responder" sceneMemberID="firstResponder"/>
