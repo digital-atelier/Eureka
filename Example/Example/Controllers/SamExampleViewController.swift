@@ -93,6 +93,38 @@ final class SamExampleViewController: FormViewController {
                         $0.trailingSwipe.actions = [deleteAction,moreAction]
                     }
                 }
+
+                let products = [Product(title: "TAG HEUER CARRERA",
+                                       price: "5,630,00€",
+                                       description: "43 MM BLUE DIAL WITH STEEL STRAP"),
+                                Product(title: "TAG HEUER FORMULA 1",
+                                        price: "4,930,00€",
+                                        description: "43 MM BLACK DIAL WITH STEEL STRAP")]
+
+
+
+                let purchases = [PurchaseHistoryContent(date: "17/09/2012",
+                                                        totalPrice: "120.2€",
+                                                        store: "There",
+                                                        products: products),
+                                 PurchaseHistoryContent(date: "12/12/2012",
+                                                        totalPrice: "1000.0€",
+                                                        store: "There",
+                                                        products: products),
+                                 PurchaseHistoryContent(date: "13/01/2014",
+                                                        totalPrice: "500.0€",
+                                                        store: "Here",
+                                                        products: []),
+                                 PurchaseHistoryContent(date: "17/09/2016",
+                                                        totalPrice: "420.90€",
+                                                        store: "There",
+                                                        products: products)]
+                //Add purchases history section
+                for purchase in purchases {
+                    form.last! <<< PurchaseHistoryRow() {
+                        $0.value = purchase
+                    }
+                }
             }
         }
     }
@@ -123,12 +155,13 @@ final class SamExampleViewController: FormViewController {
     private func style(rows: [BaseRow]) {
         let stylables = rows.compactMap { $0.baseCell as? StylableCell }
 
-        stylables.forEach { $0.style(with: self.stylist) }
+        stylables.forEach {
+            $0.style(with: self.stylist)
+        }
     }
 }
 
 protocol StylableCell {
-
     func style(with stylist: Stylist)
 }
 
@@ -190,6 +223,45 @@ final class TwoColumnCell: Cell<[ColumnContent]>, CellType, StylableCell {
     }
 }
 
+final class ThreeColumnCell: Cell<PurchaseHistoryContent>, CellType, StylableCell {
+    func style(with stylist: Stylist) {
+        self.dateLabel.font = stylist.bodyFont
+        self.amountLabel.font = stylist.bodyFont
+        self.storeLabel.font = stylist.bodyFont
+    }
+
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var storeLabel: UILabel!
+    @IBOutlet weak var expandButton: UIButton!
+
+    @IBAction func buttonPressed(_ sender: Any) {
+        guard let inline = self.row as? PurchaseHistoryRow else {
+            return
+        }
+        inline.toggleInlineRow()
+
+    }
+
+    func refresh(isExpanded: Bool) {
+        self.expandButton.isSelected = isExpanded
+    }
+
+    override func update() {
+        super.update()
+        self.contents = self.row.value!
+    }
+
+    var contents: PurchaseHistoryContent! {
+        didSet {
+            dateLabel.text = contents.date
+            amountLabel.text = contents.totalPrice
+            storeLabel.text = contents.store
+        }
+    }
+
+}
+
 struct ColumnContent: Equatable {
     let title: String
     let value: String
@@ -219,5 +291,133 @@ extension LabelCellOf: StylableCell {
 
         self.detailTextLabel?.font = stylist.accessoryFont
         self.detailTextLabel?.textColor = stylist.accessoryColor
+    }
+}
+
+struct PurchaseHistoryContent: Equatable {
+    let date: String
+    let totalPrice: String
+    let store: String
+    let products: [Product]
+
+}
+
+struct Product: Equatable {
+    let title: String
+    let price: String
+    let description: String
+}
+
+
+final class PurchaseHistoryRow: Row<ThreeColumnCell>, RowType, InlineRowType {
+
+    func setupInlineRow(_ inlineRow: PurchaseHistoryDetailsRow) {
+        print("setup inline row")
+    }
+
+    typealias InlineRow = PurchaseHistoryDetailsRow
+
+    required public init(tag: String?) {
+        super.init(tag: tag)
+        cellProvider = CellProvider<ThreeColumnCell>(nibName: "ThreeColumnCell")
+        onExpandInlineRow { cell, row, _ in
+            cell.refresh(isExpanded: true)
+        }
+
+        onCollapseInlineRow { cell, row, _ in
+            cell.refresh(isExpanded: false)
+        }
+    }
+
+    public override func customDidSelect() {
+        super.customDidSelect()
+        if !isDisabled {
+            toggleInlineRow()
+        }
+    }
+}
+
+
+final class PurchaseHistoryDetailsRow: Row<PurchaseHistoryDetailsCell>, RowType {
+    public required init(tag: String?) {
+        super.init(tag: tag)
+        cellProvider = CellProvider<PurchaseHistoryDetailsCell>(nibName: "PurchaseHistoryDetailsCell")
+    }
+}
+
+
+final class PurchaseHistoryDetailsCell: Cell<PurchaseHistoryContent>, CellType, StylableCell {
+
+    func style(with stylist: Stylist) {
+        self.stylist = stylist
+    }
+
+
+    @IBOutlet weak var stackView: UIStackView!
+    var stylist: Stylist!
+
+    public required init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+    open override func setup() {
+        super.setup()
+        accessoryType = .none
+        editingAccessoryType =  .none
+    }
+
+    open override func update() {
+        super.update()
+        selectionStyle = row.isDisabled ? .none : .default
+        self.contents = self.row.value
+    }
+
+    open override func didSelect() {
+        super.didSelect()
+        row.deselect()
+    }
+
+    var contents: PurchaseHistoryContent! {
+        didSet {
+            let products = self.contents.products
+            for product in products {
+                let view = Bundle.main.loadNibNamed("SinglePurchaseView",
+                                         owner: nil,
+                                         options: nil)!.first as! SinglePurchaseView
+
+                view.stylist = self.stylist
+                view.configure(with: product)
+                view.translatesAutoresizingMaskIntoConstraints = false
+                self.stackView.addArrangedSubview(view)
+            }
+        }
+    }
+}
+
+final class SinglePurchaseView: UIView {
+
+    @IBOutlet weak var productImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
+
+    var stylist: Stylist! {
+        didSet {
+            titleLabel.font = stylist.titleFont
+            descriptionLabel.font = stylist.bodyFont
+            priceLabel.font = stylist.accessoryFont
+        }
+    }
+
+    func configure(with product: Product) {
+        self.titleLabel.text = product.title
+        self.descriptionLabel.text = product.description
+        self.priceLabel.text = product.price
+
+        self.productImageView.image = UIImage(named: "AppIcon")
     }
 }

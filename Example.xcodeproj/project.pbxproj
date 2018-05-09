@@ -43,6 +43,10 @@
 		A0E0ACF020A0606B00864998 /* TwoColumnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0E0ACEF20A0606B00864998 /* TwoColumnCell.xib */; };
 		A0E122E4209CAA760010BE99 /* SamExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E122E3209CAA760010BE99 /* SamExampleViewController.swift */; };
 		A0E122E7209CB2D40010BE99 /* ColumnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0E122E6209CB2D40010BE99 /* ColumnCell.xib */; };
+		DF005BC820A1C6680045F825 /* ThreeColumnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF005BC720A1C6680045F825 /* ThreeColumnCell.xib */; };
+		DF005BCB20A2659D0045F825 /* PurchaseHistoryDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF005BCA20A2659D0045F825 /* PurchaseHistoryDetailsCell.xib */; };
+		DF005BCD20A3332A0045F825 /* ImageAndFloatTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF005BCC20A3332A0045F825 /* ImageAndFloatTextFieldCell.xib */; };
+		DF005BCF20A341EC0045F825 /* SinglePurchaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF005BCE20A341EC0045F825 /* SinglePurchaseView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +141,10 @@
 		A0E0ACEF20A0606B00864998 /* TwoColumnCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwoColumnCell.xib; sourceTree = "<group>"; };
 		A0E122E3209CAA760010BE99 /* SamExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamExampleViewController.swift; sourceTree = "<group>"; };
 		A0E122E6209CB2D40010BE99 /* ColumnCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColumnCell.xib; sourceTree = "<group>"; };
+		DF005BC720A1C6680045F825 /* ThreeColumnCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThreeColumnCell.xib; sourceTree = "<group>"; };
+		DF005BCA20A2659D0045F825 /* PurchaseHistoryDetailsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PurchaseHistoryDetailsCell.xib; sourceTree = "<group>"; };
+		DF005BCC20A3332A0045F825 /* ImageAndFloatTextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageAndFloatTextFieldCell.xib; sourceTree = "<group>"; };
+		DF005BCE20A341EC0045F825 /* SinglePurchaseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SinglePurchaseView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +182,7 @@
 				284D28B71E4917A000BB38E7 /* SwitchCell.xib */,
 				284D28B51E49121E00BB38E7 /* DatePickerCell.xib */,
 				284D28B91E491FEF00BB38E7 /* TextCell.xib */,
+				DF005BCE20A341EC0045F825 /* SinglePurchaseView.xib */,
 			);
 			name = "Custom Design";
 			sourceTree = "<group>";
@@ -268,6 +277,9 @@
 				51729E6D1B9A6601004A00EB /* CustomCells.swift */,
 				A0E122E6209CB2D40010BE99 /* ColumnCell.xib */,
 				A0E0ACEF20A0606B00864998 /* TwoColumnCell.xib */,
+				DF005BC720A1C6680045F825 /* ThreeColumnCell.xib */,
+				DF005BCA20A2659D0045F825 /* PurchaseHistoryDetailsCell.xib */,
+				DF005BCC20A3332A0045F825 /* ImageAndFloatTextFieldCell.xib */,
 			);
 			name = "Custom Row and Cell";
 			sourceTree = "<group>";
@@ -406,14 +418,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0E122E7209CB2D40010BE99 /* ColumnCell.xib in Resources */,
+				DF005BC820A1C6680045F825 /* ThreeColumnCell.xib in Resources */,
 				51729E281B9A54F1004A00EB /* LaunchScreen.storyboard in Resources */,
+				DF005BCF20A341EC0045F825 /* SinglePurchaseView.xib in Resources */,
 				284D28B81E4917A000BB38E7 /* SwitchCell.xib in Resources */,
 				284D28BA1E491FEF00BB38E7 /* TextCell.xib in Resources */,
 				A0E0ACF020A0606B00864998 /* TwoColumnCell.xib in Resources */,
 				51729E251B9A54F1004A00EB /* Assets.xcassets in Resources */,
 				51729E711B9A660A004A00EB /* WeekDaysCell.xib in Resources */,
+				DF005BCD20A3332A0045F825 /* ImageAndFloatTextFieldCell.xib in Resources */,
 				284D28B61E49121E00BB38E7 /* DatePickerCell.xib in Resources */,
 				28CD97C21BB32F0E00AFDA67 /* EurekaSectionHeader.xib in Resources */,
+				DF005BCB20A2659D0045F825 /* PurchaseHistoryDetailsCell.xib in Resources */,
 				51729E231B9A54F1004A00EB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
