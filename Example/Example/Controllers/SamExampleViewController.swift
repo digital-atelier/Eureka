@@ -135,6 +135,8 @@ final class SamExampleViewController: FormViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 60
 
+        self.form.inlineRowHideOptions = InlineRowHideOptions.Never
+
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
             self.customer = CustomerViewModel()
         }
